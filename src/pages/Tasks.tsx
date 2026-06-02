@@ -133,19 +133,19 @@ export default function Tasks() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Status</TableHead>
+                <TableHead className="hidden sm:table-cell">Status</TableHead>
                 <TableHead>Título</TableHead>
-                <TableHead>Categoria</TableHead>
-                <TableHead>Prioridade</TableHead>
-                <TableHead>Horário</TableHead>
-                <TableHead>Data</TableHead>
+                <TableHead className="hidden md:table-cell">Categoria</TableHead>
+                <TableHead className="hidden lg:table-cell">Prioridade</TableHead>
+                <TableHead className="hidden lg:table-cell">Horário</TableHead>
+                <TableHead className="hidden sm:table-cell">Data</TableHead>
                 <TableHead className="text-right">Ações</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filtered.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center text-muted-foreground py-10">
+                  <TableCell colSpan={3} className="text-center text-muted-foreground py-10">
                     Nenhuma tarefa encontrada.
                   </TableCell>
                 </TableRow>
@@ -154,17 +154,17 @@ export default function Tasks() {
                 const completed = t.status === "concluida";
                 return (
                   <TableRow key={t.id} className={completed ? "opacity-60" : ""}>
-                    <TableCell><Badge className={statusBadgeClass[t.status]}>{statusLabel[t.status]}</Badge></TableCell>
+                    <TableCell className="hidden sm:table-cell"><Badge className={statusBadgeClass[t.status]}>{statusLabel[t.status]}</Badge></TableCell>
                     <TableCell className={`font-medium text-xs md:text-sm ${completed ? "line-through" : ""}`}>{t.title}</TableCell>
-                    <TableCell className="text-muted-foreground text-xs md:text-sm">{t.category}</TableCell>
-                    <TableCell className="text-xs md:text-sm">
+                    <TableCell className="hidden md:table-cell text-muted-foreground text-xs md:text-sm">{t.category}</TableCell>
+                    <TableCell className="hidden lg:table-cell text-xs md:text-sm">
                       <span className="inline-flex items-center gap-1.5">
                         <span className="h-2 w-2 rounded-full" style={{ background: priorityColor[t.priority] }} />
                         <span className={`text-xs px-1.5 rounded ${priorityBadgeClass[t.priority]}`}>{priorityLabel[t.priority]}</span>
                       </span>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap text-xs md:text-sm">{t.start_time}–{t.end_time}</TableCell>
-                    <TableCell className="whitespace-nowrap text-xs md:text-sm">{formatShortDate(t.date)}</TableCell>
+                    <TableCell className="hidden lg:table-cell whitespace-nowrap text-xs md:text-sm">{t.start_time}–{t.end_time}</TableCell>
+                    <TableCell className="hidden sm:table-cell whitespace-nowrap text-xs md:text-sm">{formatShortDate(t.date)}</TableCell>
                     <TableCell>
                       <div className="flex items-center justify-end gap-0.5">
                         {t.status === "pendente" && (

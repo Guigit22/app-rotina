@@ -85,7 +85,7 @@ export default function Dashboard() {
               <p className="text-sm text-muted-foreground py-6 text-center">Nenhuma tarefa pendente para hoje. 🎉</p>
             )}
             {upcoming.map((t) => (
-              <div className="flex items-center gap-3 rounded-lg border p-3 flex-col sm:flex-row" key={t.id}>
+              <div key={t.id} className="flex items-center gap-3 rounded-lg border p-3 flex-col sm:flex-row">
                 <span className="h-2.5 w-2.5 rounded-full shrink-0" style={{ background: priorityColor[t.priority] }} />
                 <div className="min-w-0 flex-1 w-full">
                   <p className="text-sm md:text-base font-medium truncate">{t.title}</p>
