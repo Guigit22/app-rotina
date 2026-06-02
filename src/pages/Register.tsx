@@ -46,18 +46,18 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-violet-100 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-violet-100 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950 px-3 sm:px-4">
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center mb-6">
-          <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 shadow-lg">
-            <CalendarCheck className="h-7 w-7 text-white" />
+          <div className="inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 shadow-lg">
+            <CalendarCheck className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
           </div>
-          <h1 className="mt-3 text-2xl font-bold">Criar conta</h1>
+          <h1 className="mt-3 text-xl sm:text-2xl font-bold">Criar conta</h1>
         </div>
         <Card>
           <CardHeader>
-            <CardTitle className="text-xl">Cadastro</CardTitle>
-            <CardDescription>Preencha seus dados para começar</CardDescription>
+            <CardTitle className="text-lg md:text-xl">Cadastro</CardTitle>
+            <CardDescription className="text-xs md:text-sm">Preencha seus dados para começar</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -68,26 +68,26 @@ export default function Register() {
                 </Alert>
               )}
               <div>
-                <Label htmlFor="name">Nome completo</Label>
-                <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Seu nome" />
+                <Label htmlFor="name" className="text-xs md:text-sm">Nome completo</Label>
+                <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Seu nome" className="text-sm" />
               </div>
               <div>
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="voce@email.com" />
+                <Label htmlFor="email" className="text-xs md:text-sm">Email</Label>
+                <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="voce@email.com" className="text-sm" />
               </div>
               <div>
-                <Label htmlFor="password">Senha</Label>
-                <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••" />
+                <Label htmlFor="password" className="text-xs md:text-sm">Senha</Label>
+                <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••" className="text-sm" />
               </div>
               <div>
-                <Label htmlFor="confirm">Confirmar senha</Label>
-                <Input id="confirm" type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} placeholder="••••••" />
+                <Label htmlFor="confirm" className="text-xs md:text-sm">Confirmar senha</Label>
+                <Input id="confirm" type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} placeholder="••••••" className="text-sm" />
               </div>
-              <Button type="submit" className="w-full" disabled={loading}>
+              <Button type="submit" className="w-full text-sm" disabled={loading}>
                 {loading && <Loader2 className="animate-spin" />} Cadastrar
               </Button>
             </form>
-            <p className="mt-4 text-center text-sm text-muted-foreground">
+            <p className="mt-4 text-center text-xs md:text-sm text-muted-foreground">
               <Link to="/login" className="text-primary font-medium hover:underline">Já tenho conta</Link>
             </p>
           </CardContent>

@@ -49,22 +49,22 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold">Olá, {user?.name}</h2>
-        <p className="text-muted-foreground">Aqui está seu resumo de hoje</p>
+        <h2 className="text-xl md:text-2xl font-bold">Olá, {user?.name}</h2>
+        <p className="text-sm md:text-base text-muted-foreground">Aqui está seu resumo de hoje</p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
         {cards.map((c) => {
           const Icon = c.icon;
           return (
             <Card key={c.label}>
-              <CardContent className="p-4 flex items-center gap-3">
-                <div className={`h-11 w-11 rounded-lg flex items-center justify-center ${c.color}`}>
-                  <Icon className="h-5 w-5" />
+              <CardContent className="p-3 md:p-4 flex items-center gap-3">
+                <div className={`h-10 w-10 md:h-11 md:w-11 rounded-lg flex items-center justify-center ${c.color}`}>
+                  <Icon className="h-4 w-4 md:h-5 md:w-5" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold leading-none">{c.value}</p>
-                  <p className="text-xs text-muted-foreground mt-1">{c.label}</p>
+                  <p className="text-lg md:text-2xl font-bold leading-none">{c.value}</p>
+                  <p className="text-xs md:text-sm text-muted-foreground mt-1">{c.label}</p>
                 </div>
               </CardContent>
             </Card>
@@ -72,12 +72,12 @@ export default function Dashboard() {
         })}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card>
-          <CardHeader className="flex-row items-center justify-between">
-            <CardTitle>Próximas Tarefas</CardTitle>
-            <Button variant="ghost" size="sm" onClick={() => navigate("/tarefas")}>
-              Ver todas <ArrowRight />
+          <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
+            <CardTitle className="text-base md:text-lg">Próximas Tarefas</CardTitle>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/tarefas")} className="w-full sm:w-auto">
+              Ver todas <ArrowRight className="h-4 w-4" />
             </Button>
           </CardHeader>
           <CardContent className="space-y-2">
@@ -85,11 +85,11 @@ export default function Dashboard() {
               <p className="text-sm text-muted-foreground py-6 text-center">Nenhuma tarefa pendente para hoje. 🎉</p>
             )}
             {upcoming.map((t) => (
-              <div key={t.id} className="flex items-center gap-3 rounded-lg border p-3">
+              <div className="flex items-center gap-3 rounded-lg border p-3 flex-col sm:flex-row" key={t.id}>
                 <span className="h-2.5 w-2.5 rounded-full shrink-0" style={{ background: priorityColor[t.priority] }} />
-                <div className="min-w-0 flex-1">
-                  <p className="font-medium truncate">{t.title}</p>
-                  <p className="text-xs text-muted-foreground">{t.start_time} - {t.end_time}</p>
+                <div className="min-w-0 flex-1 w-full">
+                  <p className="text-sm md:text-base font-medium truncate">{t.title}</p>
+                  <p className="text-xs md:text-sm text-muted-foreground">{t.start_time} - {t.end_time}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1">
                   <Badge className={statusBadgeClass[t.status]}>{statusLabel[t.status]}</Badge>
@@ -101,10 +101,10 @@ export default function Dashboard() {
         </Card>
 
         <Card>
-          <CardHeader className="flex-row items-center justify-between">
-            <CardTitle>Hábitos de Hoje</CardTitle>
-            <Button variant="ghost" size="sm" onClick={() => navigate("/habitos")}>
-              Gerenciar <ArrowRight />
+          <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
+            <CardTitle className="text-base md:text-lg">Hábitos de Hoje</CardTitle>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/habitos")} className="w-full sm:w-auto">
+              Gerenciar <ArrowRight className="h-4 w-4" />
             </Button>
           </CardHeader>
           <CardContent className="space-y-2">
@@ -114,12 +114,12 @@ export default function Dashboard() {
             {activeHabits.map((h) => {
               const checked = isHabitDone(h.id, today);
               return (
-                <div key={h.id} className="flex items-center gap-3 rounded-lg border p-3">
+                <div key={h.id} className="flex items-center gap-3 rounded-lg border p-3 flex-col sm:flex-row">
                   <Checkbox checked={checked} onCheckedChange={() => onToggleHabit(h.id)} />
-                  <span className="text-xl">{h.icon}</span>
-                  <div className="min-w-0 flex-1">
-                    <p className={`font-medium truncate ${checked ? "line-through text-muted-foreground" : ""}`}>{h.name}</p>
-                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                  <span className="text-lg md:text-xl">{h.icon}</span>
+                  <div className="min-w-0 flex-1 w-full">
+                    <p className={`text-sm md:text-base font-medium truncate ${checked ? "line-through text-muted-foreground" : ""}`}>{h.name}</p>
+                    <div className="flex items-center gap-1 text-xs md:text-sm text-muted-foreground">
                       <Flame className="h-3 w-3 text-orange-500" /> {h.current_streak} dias
                     </div>
                   </div>
@@ -128,7 +128,7 @@ export default function Dashboard() {
             })}
             {activeHabits.length > 0 && (
               <div className="pt-2">
-                <div className="flex justify-between text-xs text-muted-foreground mb-1">
+                <div className="flex justify-between text-xs md:text-sm text-muted-foreground mb-1">
                   <span>Progresso de hoje</span>
                   <span>{habitsDone}/{activeHabits.length}</span>
                 </div>

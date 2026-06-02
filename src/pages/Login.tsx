@@ -69,19 +69,19 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-violet-100 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-violet-100 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950 px-3 sm:px-4">
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center mb-6">
-          <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 shadow-lg">
-            <CalendarCheck className="h-7 w-7 text-white" />
+          <div className="inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 shadow-lg">
+            <CalendarCheck className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
           </div>
-          <h1 className="mt-3 text-2xl font-bold">Planejador de Rotina</h1>
-          <p className="text-sm text-muted-foreground">Organize seus dias, construa hábitos.</p>
+          <h1 className="mt-3 text-xl sm:text-2xl font-bold">Planejador de Rotina</h1>
+          <p className="text-xs sm:text-sm text-muted-foreground">Organize seus dias, construa hábitos.</p>
         </div>
         <Card>
           <CardHeader>
-            <CardTitle className="text-xl">Entrar</CardTitle>
-            <CardDescription>Acesse sua conta para continuar</CardDescription>
+            <CardTitle className="text-lg md:text-xl">Entrar</CardTitle>
+            <CardDescription className="text-xs md:text-sm">Acesse sua conta para continuar</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -92,23 +92,23 @@ export default function Login() {
                 </Alert>
               )}
               <div>
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="voce@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <Label htmlFor="email" className="text-xs md:text-sm">Email</Label>
+                <Input id="email" type="email" placeholder="voce@email.com" value={email} onChange={(e) => setEmail(e.target.value)} className="text-sm" />
               </div>
               <div>
-                <Label htmlFor="password">Senha</Label>
-                <Input id="password" type="password" placeholder="••••••" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <Label htmlFor="password" className="text-xs md:text-sm">Senha</Label>
+                <Input id="password" type="password" placeholder="••••••" value={password} onChange={(e) => setPassword(e.target.value)} className="text-sm" />
               </div>
               <div className="text-right">
-                <button type="button" onClick={() => setForgotOpen(true)} className="text-sm text-primary hover:underline">
+                <button type="button" onClick={() => setForgotOpen(true)} className="text-xs md:text-sm text-primary hover:underline">
                   Esqueci minha senha
                 </button>
               </div>
-              <Button type="submit" className="w-full" disabled={loading}>
+              <Button type="submit" className="w-full text-sm" disabled={loading}>
                 {loading && <Loader2 className="animate-spin" />} Entrar
               </Button>
             </form>
-            <p className="mt-4 text-center text-sm text-muted-foreground">
+            <p className="mt-4 text-center text-xs md:text-sm text-muted-foreground">
               Não tem uma conta?{" "}
               <Link to="/register" className="text-primary font-medium hover:underline">Cadastre-se</Link>
             </p>
@@ -122,21 +122,21 @@ export default function Login() {
       </div>
 
       <Dialog open={forgotOpen} onOpenChange={setForgotOpen}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-[90%] md:max-w-md">
           <DialogHeader>
-            <DialogTitle>Recuperar senha</DialogTitle>
-            <DialogDescription>Informe seu email para receber o link de recuperação.</DialogDescription>
+            <DialogTitle className="text-base md:text-lg">Recuperar senha</DialogTitle>
+            <DialogDescription className="text-xs md:text-sm">Informe seu email para receber o link de recuperação.</DialogDescription>
           </DialogHeader>
           <div className="space-y-2">
-            <Label htmlFor="forgot">Email</Label>
+            <Label htmlFor="forgot" className="text-xs md:text-sm">Email</Label>
             <div className="relative">
               <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-              <Input id="forgot" type="email" className="pl-9" placeholder="voce@email.com" value={forgotEmail} onChange={(e) => setForgotEmail(e.target.value)} />
+              <Input id="forgot" type="email" className="pl-9 text-sm" placeholder="voce@email.com" value={forgotEmail} onChange={(e) => setForgotEmail(e.target.value)} />
             </div>
           </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setForgotOpen(false)}>Cancelar</Button>
-            <Button onClick={handleForgot} disabled={forgotLoading}>
+          <DialogFooter className="gap-2 sm:gap-0">
+            <Button variant="outline" onClick={() => setForgotOpen(false)} className="text-xs md:text-sm">Cancelar</Button>
+            <Button onClick={handleForgot} disabled={forgotLoading} className="text-xs md:text-sm">
               {forgotLoading && <Loader2 className="animate-spin" />} Enviar
             </Button>
           </DialogFooter>

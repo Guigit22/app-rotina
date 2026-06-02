@@ -103,37 +103,37 @@ export default function TaskDialog({ open, onOpenChange, editing, defaultDate }:
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg">
+      <DialogContent className="sm:max-w-[90%] md:max-w-lg">
         <DialogHeader>
-          <DialogTitle>{editing ? "Editar Tarefa" : "Nova Tarefa"}</DialogTitle>
-          <DialogDescription>Preencha os detalhes da tarefa.</DialogDescription>
+          <DialogTitle className="text-base md:text-lg">{editing ? "Editar Tarefa" : "Nova Tarefa"}</DialogTitle>
+          <DialogDescription className="text-xs md:text-sm">Preencha os detalhes da tarefa.</DialogDescription>
         </DialogHeader>
         <div className="space-y-3 max-h-[60vh] overflow-y-auto pr-1">
           {error && (
             <Alert variant="destructive"><AlertCircle /><AlertDescription>{error}</AlertDescription></Alert>
           )}
           <div>
-            <Label>Título *</Label>
-            <Input value={form.title} onChange={(e) => set("title", e.target.value)} placeholder="Ex: Reunião de equipe" />
+            <Label className="text-xs md:text-sm">Título *</Label>
+            <Input value={form.title} onChange={(e) => set("title", e.target.value)} placeholder="Ex: Reunião de equipe" className="text-sm" />
           </div>
           <div>
-            <Label>Descrição</Label>
-            <Textarea value={form.description} onChange={(e) => set("description", e.target.value)} placeholder="Opcional" />
+            <Label className="text-xs md:text-sm">Descrição</Label>
+            <Textarea value={form.description} onChange={(e) => set("description", e.target.value)} placeholder="Opcional" className="text-sm" />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <Label>Categoria *</Label>
+              <Label className="text-xs md:text-sm">Categoria *</Label>
               <Select value={form.category} onValueChange={(v) => set("category", v)}>
-                <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+                <SelectTrigger className="text-sm"><SelectValue placeholder="Selecione" /></SelectTrigger>
                 <SelectContent>
                   {TASK_CATEGORIES.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
             <div>
-              <Label>Prioridade *</Label>
+              <Label className="text-xs md:text-sm">Prioridade *</Label>
               <Select value={form.priority} onValueChange={(v) => set("priority", v as Priority)}>
-                <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+                <SelectTrigger className="text-sm"><SelectValue placeholder="Selecione" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="alta">Alta</SelectItem>
                   <SelectItem value="media">Média</SelectItem>
@@ -143,40 +143,40 @@ export default function TaskDialog({ open, onOpenChange, editing, defaultDate }:
             </div>
           </div>
           <div>
-            <Label>Data *</Label>
-            <Input type="date" value={form.date} onChange={(e) => set("date", e.target.value)} />
+            <Label className="text-xs md:text-sm">Data *</Label>
+            <Input type="date" value={form.date} onChange={(e) => set("date", e.target.value)} className="text-sm" />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <Label>Hora de início *</Label>
-              <Input type="time" value={form.start_time} onChange={(e) => set("start_time", e.target.value)} />
+              <Label className="text-xs md:text-sm">Hora de início *</Label>
+              <Input type="time" value={form.start_time} onChange={(e) => set("start_time", e.target.value)} className="text-sm" />
             </div>
             <div>
-              <Label>Hora de término *</Label>
-              <Input type="time" value={form.end_time} onChange={(e) => set("end_time", e.target.value)} />
+              <Label className="text-xs md:text-sm">Hora de término *</Label>
+              <Input type="time" value={form.end_time} onChange={(e) => set("end_time", e.target.value)} className="text-sm" />
             </div>
           </div>
           <div className="flex items-center justify-between rounded-md border p-3">
             <div>
-              <Label className="mb-0">Lembrete</Label>
+              <Label className="mb-0 text-xs md:text-sm">Lembrete</Label>
               <p className="text-xs text-muted-foreground">Notificar antes da tarefa</p>
             </div>
             <Switch checked={form.reminder} onCheckedChange={(v) => set("reminder", v)} />
           </div>
           {form.reminder && (
             <div>
-              <Label>Horário do lembrete</Label>
-              <Input type="time" value={form.reminder_time} onChange={(e) => set("reminder_time", e.target.value)} />
+              <Label className="text-xs md:text-sm">Horário do lembrete</Label>
+              <Input type="time" value={form.reminder_time} onChange={(e) => set("reminder_time", e.target.value)} className="text-sm" />
             </div>
           )}
           <div>
-            <Label>Observações</Label>
-            <Textarea value={form.notes} onChange={(e) => set("notes", e.target.value)} placeholder="Opcional" />
+            <Label className="text-xs md:text-sm">Observações</Label>
+            <Textarea value={form.notes} onChange={(e) => set("notes", e.target.value)} placeholder="Opcional" className="text-sm" />
           </div>
         </div>
-        <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)}>Cancelar</Button>
-          <Button onClick={handleSave} disabled={saving}>
+        <DialogFooter className="gap-2 sm:gap-0">
+          <Button variant="outline" onClick={() => onOpenChange(false)} className="text-xs md:text-sm">Cancelar</Button>
+          <Button onClick={handleSave} disabled={saving} className="text-xs md:text-sm">
             {saving && <Loader2 className="animate-spin" />} Salvar
           </Button>
         </DialogFooter>

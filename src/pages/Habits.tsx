@@ -150,10 +150,10 @@ export default function Habits() {
     <div className="space-y-5">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h2 className="text-2xl font-bold flex items-center gap-2"><Repeat className="h-6 w-6" /> Meus Hábitos</h2>
-          <p className="text-muted-foreground text-sm">Construa rotinas consistentes</p>
+          <h2 className="text-xl md:text-2xl font-bold flex items-center gap-2"><Repeat className="h-5 w-5 md:h-6 md:w-6" /> Meus Hábitos</h2>
+          <p className="text-muted-foreground text-xs md:text-sm">Construa rotinas consistentes</p>
         </div>
-        <Button onClick={() => { setEditing(null); setOpen(true); }} className="w-full sm:w-auto"><Plus /> Novo Hábito</Button>
+        <Button onClick={() => { setEditing(null); setOpen(true); }} className="w-full sm:w-auto"><Plus className="h-4 w-4" /> Novo Hábito</Button>
       </div>
 
       {habits.length === 0 && (
@@ -167,21 +167,21 @@ export default function Habits() {
           return (
             <Card key={h.id} className={`relative overflow-hidden ${!h.is_active ? "opacity-60" : ""}`}>
               <div className="h-1.5 w-full" style={{ background: h.color }} />
-              <CardContent className="p-4 space-y-3">
+              <CardContent className="p-3 md:p-6 space-y-3">
                 <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <span className={`text-3xl ${celebrating === h.id ? "animate-celebrate" : ""}`}>{h.icon}</span>
+                  <div className="flex items-center gap-2 md:gap-3 min-w-0">
+                    <span className={`text-2xl md:text-3xl ${celebrating === h.id ? "animate-celebrate" : ""}`}>{h.icon}</span>
                     <div className="min-w-0">
-                      <p className="font-semibold truncate">{h.name}</p>
+                      <p className="text-sm md:text-base font-semibold truncate">{h.name}</p>
                       <div className="flex gap-1.5 mt-1 flex-wrap">
-                        <Badge variant="secondary" className="text-[10px]">{h.category}</Badge>
-                        <Badge variant="outline" className="text-[10px]">{frequencyLabel[h.frequency]}</Badge>
+                        <Badge variant="secondary" className="text-[10px] md:text-xs">{h.category}</Badge>
+                        <Badge variant="outline" className="text-[10px] md:text-xs">{frequencyLabel[h.frequency]}</Badge>
                       </div>
                     </div>
                   </div>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0"><MoreVertical className="h-4 w-4" /></Button>
+                      <Button variant="ghost" size="sm" className="h-8 w-8 shrink-0"><MoreVertical className="h-4 w-4" /></Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem onClick={() => { setEditing(h); setOpen(true); }}><Pencil /> Editar</DropdownMenuItem>
@@ -193,13 +193,13 @@ export default function Habits() {
                   </DropdownMenu>
                 </div>
 
-                <div className="flex items-center gap-4 text-sm">
-                  <span className="inline-flex items-center gap-1"><Flame className="h-4 w-4 text-orange-500" /> {h.current_streak} dias</span>
-                  <span className="inline-flex items-center gap-1"><Trophy className="h-4 w-4 text-amber-500" /> {h.best_streak} recorde</span>
+                <div className="flex items-center gap-4 text-xs md:text-sm">
+                  <span className="inline-flex items-center gap-1"><Flame className="h-3 w-3 md:h-4 md:w-4 text-orange-500" /> {h.current_streak} dias</span>
+                  <span className="inline-flex items-center gap-1"><Trophy className="h-3 w-3 md:h-4 md:w-4 text-amber-500" /> {h.best_streak} recorde</span>
                 </div>
 
                 <div>
-                  <div className="flex justify-between text-xs text-muted-foreground mb-1">
+                  <div className="flex justify-between text-xs md:text-sm text-muted-foreground mb-1">
                     <span>Meta semanal</span><span>{weeklyCount(h)}/{h.target_count}</span>
                   </div>
                   <Progress value={progress} indicatorColor={h.color} />
@@ -209,10 +209,10 @@ export default function Habits() {
                   onClick={() => onToggle(h)}
                   disabled={!h.is_active}
                   variant={done ? "secondary" : "default"}
-                  className="w-full"
+                  className="w-full text-sm md:text-base"
                   style={done ? {} : { background: h.color }}
                 >
-                  <Check /> {done ? "Concluído hoje" : "Marcar como feito"}
+                  <Check className="h-4 w-4" /> {done ? "Concluído hoje" : "Marcar como feito"}
                 </Button>
               </CardContent>
             </Card>

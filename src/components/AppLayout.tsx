@@ -33,14 +33,14 @@ export default function AppLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-muted/30">
       <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
-        <div className="mx-auto max-w-6xl px-4 h-16 flex items-center justify-between gap-3">
-          <Link to="/" className="flex items-center gap-3 min-w-0">
-            <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600">
-              <CalendarCheck className="h-5 w-5 text-white" />
+        <div className="mx-auto max-w-6xl px-3 sm:px-4 py-2 sm:py-3 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-3">
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <div className="inline-flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600">
+              <CalendarCheck className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
             </div>
-            <div className="min-w-0">
-              <p className="font-semibold leading-tight truncate">{user?.name}</p>
-              <p className="text-xs text-muted-foreground leading-tight truncate hidden xs:block sm:block">
+            <div className="min-w-0 hidden sm:block">
+              <p className="text-sm sm:text-base font-semibold leading-tight truncate">{user?.name}</p>
+              <p className="text-xs text-muted-foreground leading-tight truncate">
                 {formatLongDate(new Date())}
               </p>
             </div>
@@ -77,7 +77,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
           </div>
         </div>
       </header>
-      <main className="mx-auto max-w-6xl px-4 py-6 animate-fadein">{children}</main>
+      <main className="mx-auto max-w-6xl px-3 sm:px-4 py-4 sm:py-6 animate-fadein">{children}</main>
     </div>
   );
 }

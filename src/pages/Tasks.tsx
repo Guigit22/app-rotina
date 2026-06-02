@@ -72,29 +72,29 @@ export default function Tasks() {
     <div className="space-y-5">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h2 className="text-2xl font-bold flex items-center gap-2"><ListTodo className="h-6 w-6" /> Minhas Tarefas</h2>
-          <p className="text-muted-foreground text-sm">{filtered.length} tarefa(s) encontrada(s)</p>
+          <h2 className="text-xl md:text-2xl font-bold flex items-center gap-2"><ListTodo className="h-5 w-5 md:h-6 md:w-6" /> Minhas Tarefas</h2>
+          <p className="text-muted-foreground text-xs md:text-sm">{filtered.length} tarefa(s) encontrada(s)</p>
         </div>
-        <Button onClick={openNew} className="w-full sm:w-auto"><Plus /> Nova Tarefa</Button>
+        <Button onClick={openNew} className="w-full sm:w-auto"><Plus className="h-4 w-4" /> Nova Tarefa</Button>
       </div>
 
       <Card>
-        <CardContent className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+        <CardContent className="p-4 flex flex-col gap-3 sm:grid sm:grid-cols-2 lg:grid-cols-5 lg:gap-3">
           <div>
-            <Label>Buscar</Label>
+            <Label className="text-xs md:text-sm">Buscar</Label>
             <div className="relative">
               <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-              <Input className="pl-9" placeholder="Título..." value={search} onChange={(e) => setSearch(e.target.value)} />
+              <Input className="pl-9 text-sm" placeholder="Título..." value={search} onChange={(e) => setSearch(e.target.value)} />
             </div>
           </div>
           <div>
-            <Label>Data</Label>
-            <Input type="date" value={fDate} onChange={(e) => setFDate(e.target.value)} />
+            <Label className="text-xs md:text-sm">Data</Label>
+            <Input type="date" className="text-sm" value={fDate} onChange={(e) => setFDate(e.target.value)} />
           </div>
           <div>
-            <Label>Status</Label>
+            <Label className="text-xs md:text-sm">Status</Label>
             <Select value={fStatus} onValueChange={setFStatus}>
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger className="text-sm"><SelectValue /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="todas">Todas</SelectItem>
                 <SelectItem value="pendente">Pendentes</SelectItem>
@@ -104,9 +104,9 @@ export default function Tasks() {
             </Select>
           </div>
           <div>
-            <Label>Prioridade</Label>
+            <Label className="text-xs md:text-sm">Prioridade</Label>
             <Select value={fPriority} onValueChange={setFPriority}>
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger className="text-sm"><SelectValue /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="todas">Todas</SelectItem>
                 <SelectItem value="alta">Alta</SelectItem>
@@ -116,9 +116,9 @@ export default function Tasks() {
             </Select>
           </div>
           <div>
-            <Label>Categoria</Label>
+            <Label className="text-xs md:text-sm">Categoria</Label>
             <Select value={fCategory} onValueChange={setFCategory}>
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger className="text-sm"><SelectValue /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="todas">Todas</SelectItem>
                 {TASK_CATEGORIES.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
@@ -129,7 +129,7 @@ export default function Tasks() {
       </Card>
 
       <Card>
-        <CardContent className="p-0">
+        <CardContent className="p-0 overflow-x-auto">
           <Table>
             <TableHeader>
               <TableRow>
@@ -155,32 +155,32 @@ export default function Tasks() {
                 return (
                   <TableRow key={t.id} className={completed ? "opacity-60" : ""}>
                     <TableCell><Badge className={statusBadgeClass[t.status]}>{statusLabel[t.status]}</Badge></TableCell>
-                    <TableCell className={`font-medium ${completed ? "line-through" : ""}`}>{t.title}</TableCell>
-                    <TableCell className="text-muted-foreground">{t.category}</TableCell>
-                    <TableCell>
+                    <TableCell className={`font-medium text-xs md:text-sm ${completed ? "line-through" : ""}`}>{t.title}</TableCell>
+                    <TableCell className="text-muted-foreground text-xs md:text-sm">{t.category}</TableCell>
+                    <TableCell className="text-xs md:text-sm">
                       <span className="inline-flex items-center gap-1.5">
                         <span className="h-2 w-2 rounded-full" style={{ background: priorityColor[t.priority] }} />
                         <span className={`text-xs px-1.5 rounded ${priorityBadgeClass[t.priority]}`}>{priorityLabel[t.priority]}</span>
                       </span>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap text-sm">{t.start_time}–{t.end_time}</TableCell>
-                    <TableCell className="whitespace-nowrap text-sm">{formatShortDate(t.date)}</TableCell>
+                    <TableCell className="whitespace-nowrap text-xs md:text-sm">{t.start_time}–{t.end_time}</TableCell>
+                    <TableCell className="whitespace-nowrap text-xs md:text-sm">{formatShortDate(t.date)}</TableCell>
                     <TableCell>
-                      <div className="flex items-center justify-end gap-1">
+                      <div className="flex items-center justify-end gap-0.5">
                         {t.status === "pendente" && (
-                          <Button variant="ghost" size="icon" className="h-8 w-8" title="Iniciar" onClick={() => changeStatus(t, "em_andamento")}>
+                          <Button variant="ghost" size="sm" className="h-8 w-8" title="Iniciar" onClick={() => changeStatus(t, "em_andamento")}>
                             <Play className="h-4 w-4 text-amber-600" />
                           </Button>
                         )}
                         {t.status !== "concluida" && (
-                          <Button variant="ghost" size="icon" className="h-8 w-8" title="Concluir" onClick={() => changeStatus(t, "concluida")}>
+                          <Button variant="ghost" size="sm" className="h-8 w-8" title="Concluir" onClick={() => changeStatus(t, "concluida")}>
                             <Check className="h-4 w-4 text-green-600" />
                           </Button>
                         )}
-                        <Button variant="ghost" size="icon" className="h-8 w-8" title="Editar" onClick={() => openEdit(t)}>
+                        <Button variant="ghost" size="sm" className="h-8 w-8" title="Editar" onClick={() => openEdit(t)}>
                           <Pencil className="h-4 w-4" />
                         </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8" title="Excluir" onClick={() => setDeleteTarget(t)}>
+                        <Button variant="ghost" size="sm" className="h-8 w-8" title="Excluir" onClick={() => setDeleteTarget(t)}>
                           <Trash2 className="h-4 w-4 text-destructive" />
                         </Button>
                       </div>

@@ -64,29 +64,29 @@ export default function CalendarPage() {
   return (
     <div className="space-y-5">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <h2 className="text-2xl font-bold flex items-center gap-2"><CalIcon className="h-6 w-6" /> Calendário</h2>
+        <h2 className="text-xl md:text-2xl font-bold flex items-center gap-2"><CalIcon className="h-5 w-5 md:h-6 md:w-6" /> Calendarário</h2>
         <Button onClick={() => { setEditing(null); setDialogOpen(true); }} className="w-full sm:w-auto">
-          <Plus /> Nova Tarefa
+          <Plus className="h-4 w-4" /> Nova Tarefa
         </Button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <Card className="lg:col-span-2">
-          <CardHeader className="flex-row items-center justify-between">
-            <CardTitle className="capitalize">{monthLabel(cursor)}</CardTitle>
-            <div className="flex gap-1">
-              <Button variant="outline" size="icon" onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() - 1, 1))}>
+          <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <CardTitle className="capitalize text-base md:text-lg">{monthLabel(cursor)}</CardTitle>
+            <div className="flex gap-1 flex-wrap">
+              <Button variant="outline" size="sm" onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() - 1, 1))}>
                 <ChevronLeft className="h-4 w-4" />
               </Button>
               <Button variant="outline" size="sm" onClick={() => { setCursor(new Date()); setSelected(today); }}>Hoje</Button>
-              <Button variant="outline" size="icon" onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1))}>
+              <Button variant="outline" size="sm" onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1))}>
                 <ChevronRight className="h-4 w-4" />
               </Button>
             </div>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-7 gap-1 mb-1">
-              {WD.map((d) => <div key={d} className="text-center text-xs font-medium text-muted-foreground py-1">{d}</div>)}
+              {WD.map((d) => <div key={d} className="text-center text-[10px] md:text-xs font-medium text-muted-foreground py-1">{d}</div>)}
             </div>
             <div className="grid grid-cols-7 gap-1">
               {grid.map((iso, i) => {
@@ -99,14 +99,15 @@ export default function CalendarPage() {
                   <button
                     key={iso}
                     onClick={() => setSelected(iso)}
-                    className={`relative aspect-square rounded-lg border p-1 text-left transition-colors hover:bg-accent
+                    className={`relative aspect-square rounded-lg border p-1 text-left transition-colors hover:bg-accent text-xs md:text-sm
                       ${isSel ? "ring-2 ring-primary" : ""} ${isToday ? "bg-primary/10 border-primary/40" : "bg-background"}`}
                   >
-                    <span className={`text-xs sm:text-sm font-medium ${isToday ? "text-primary" : ""}`}>{Number(iso.slice(-2))}</span>
-                    {habitsComplete && <Star className="absolute top-1 right-1 h-3 w-3 text-yellow-500 fill-yellow-500" />}
+                    <span className={`text-[10px] md:text-xs font-medium ${isToday ? "text-primary" : ""}`}>{Number(iso.slice(-2))}</span>
+                    {habitsComplete && <Star className="absolute top-0.5 right-0.5 h-2.5 w-2.5 md:h-3 md:w-3 text-yellow-500 fill-yellow-500" />
+                    }
                     <div className="absolute bottom-1 left-1 right-1 flex flex-wrap gap-0.5">
                       {dayTasks.slice(0, 4).map((t) => (
-                        <span key={t.id} className="h-1.5 w-1.5 rounded-full" style={{ background: priorityColor[t.priority] }} />
+                        <span key={t.id} className="h-1 w-1 md:h-1.5 md:w-1.5 rounded-full" style={{ background: priorityColor[t.priority] }} />
                       ))}
                     </div>
                   </button>
@@ -118,12 +119,12 @@ export default function CalendarPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-base capitalize">{formatLongDate(new Date(selected + "T00:00:00"))}</CardTitle>
+            <CardTitle className="text-sm md:text-base capitalize">{formatLongDate(new Date(selected + "T00:00:00"))}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
               <div className="flex items-center justify-between mb-2">
-                <h4 className="font-semibold text-sm">Tarefas</h4>
+                <h4 className="font-semibold text-xs md:text-sm">Tarefas</h4>
                 <Button variant="ghost" size="sm" onClick={() => { setEditing(null); setDialogOpen(true); }}>
                   <Plus className="h-4 w-4" />
                 </Button>
@@ -134,16 +135,16 @@ export default function CalendarPage() {
                   <div key={t.id} className={`rounded-lg border p-2.5 ${t.status === "concluida" ? "opacity-60" : ""}`}>
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
-                        <p className={`text-sm font-medium truncate ${t.status === "concluida" ? "line-through" : ""}`}>{t.title}</p>
+                        <p className={`text-xs md:text-sm font-medium truncate ${t.status === "concluida" ? "line-through" : ""}`}>{t.title}</p>
                         <p className="text-xs text-muted-foreground">{t.start_time}–{t.end_time}</p>
                         <Badge className={`${statusBadgeClass[t.status]} mt-1 text-[10px]`}>{statusLabel[t.status]}</Badge>
                       </div>
                       <div className="flex gap-0.5 shrink-0">
                         {t.status !== "concluida" && (
-                          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => complete(t)}><Check className="h-3.5 w-3.5 text-green-600" /></Button>
+                          <Button variant="ghost" size="sm" className="h-7 w-7" onClick={() => complete(t)}><Check className="h-3.5 w-3.5 text-green-600" /></Button>
                         )}
-                        <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => { setEditing(t); setDialogOpen(true); }}><Pencil className="h-3.5 w-3.5" /></Button>
-                        <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => del(t)}><Trash2 className="h-3.5 w-3.5 text-destructive" /></Button>
+                        <Button variant="ghost" size="sm" className="h-7 w-7" onClick={() => { setEditing(t); setDialogOpen(true); }}><Pencil className="h-3.5 w-3.5" /></Button>
+                        <Button variant="ghost" size="sm" className="h-7 w-7" onClick={() => del(t)}><Trash2 className="h-3.5 w-3.5 text-destructive" /></Button>
                       </div>
                     </div>
                   </div>
@@ -152,7 +153,7 @@ export default function CalendarPage() {
             </div>
 
             <div>
-              <h4 className="font-semibold text-sm mb-2">Hábitos</h4>
+              <h4 className="font-semibold text-xs md:text-sm mb-2">Hábitos</h4>
               {activeHabits.length === 0 && <p className="text-xs text-muted-foreground">Nenhum hábito ativo.</p>}
               <div className="space-y-2">
                 {activeHabits.map((h) => {
@@ -160,8 +161,8 @@ export default function CalendarPage() {
                   return (
                     <label key={h.id} className="flex items-center gap-2 rounded-lg border p-2.5 cursor-pointer">
                       <Checkbox checked={done} onCheckedChange={() => onToggleHabit(h.id)} />
-                      <span>{h.icon}</span>
-                      <span className={`text-sm ${done ? "line-through text-muted-foreground" : ""}`}>{h.name}</span>
+                      <span className="text-lg md:text-xl">{h.icon}</span>
+                      <span className={`text-xs md:text-sm ${done ? "line-through text-muted-foreground" : ""}`}>{h.name}</span>
                     </label>
                   );
                 })}
